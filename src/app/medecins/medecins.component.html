@@ -1,0 +1,41 @@
+<app-navbar></app-navbar>
+<h2>
+    Les médecins
+</h2>
+<nav class="navbar navbar-inverse" [hidden]="estCacheMenu">
+    <ul class="nav navbar-nav"
+    style="display:flex; flex-direction: row;
+        justify-content: center">
+    <li><a (click)="derniersRapports()">derniersRapports</a></li>
+    </ul>
+</nav>
+<div class="col-lg-6">
+    <div class="form-group">
+        <input type="search" placeholder="Nom du médecin..."
+        [(ngModel)]="nomMedecin" (keyup)="charger()" />
+    </div>
+</div>
+<!--affichage des médecins-->
+<div class="list-group">
+    <ul>
+        <li class="list-group-item" *ngFor="let medecin of lesMedecins"
+        (click)="selectionner(medecin)">
+            {{medecin.nom}} {{medecin.prenom}} ;dep : {{medecin.departement}}
+        </li>
+    </ul>
+</div>
+<!--affichage des rapports-->
+<table class="table table-bordered" *ngIf="afficherRapports">
+    <tr>
+        <th>Date</th>
+        <th>motif</th>
+        <th>Bilan</th>
+        <th>Nom du visiteur</th>
+    </tr>
+    <tr *ngFor="let rapport of lesRapports">
+        <td>{{rapport.date}}</td>
+        <td>{{rapport.motif}}</td>
+        <td>{{rapport.bilan}}</td>
+        <td>{{rapport.nom}}</td>
+    </tr>
+</table>
